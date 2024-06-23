@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Range Search</title>
+</head>
+<body>
+    <h1>Search Data Range</h1>
+    <form method="POST" action="/search">
+        <label for="column_name">Column:</label>
+        <select name="column_name" id="column_name">
+            {% for column in df.columns %}
+                <option value="{{ column }}">{{ column }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="min_value">Min Value:</label>
+        <input type="number" name="min_value" id="min_value">
+        <br>
+        <label for="max_value">Max Value:</label>
+        <input type="number" name="max_value" id="max_value">
+        <br>
+        <button type="submit">Search</button>
+    </form>
+    <br>
+    {% if results %}
+        <h2>Results</h2>
+        {{ results|safe }}  {% endif %}
+</body>
+</html>

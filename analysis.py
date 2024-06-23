@@ -6,6 +6,19 @@ import numpy as np
 
 
 def distribute(center: float, w1: float, w2: float, width, arr):
+    """
+      This function distributes the weights over a range of airfoil linearly centered around a given value.
+
+      Args:
+            center: the most weighted value located at the center
+            w1: the weight of the most weighted value
+            w2: the weight of the least weighted values
+            width: the width of the range of airfoil linearly centered around a given value, number of points of the array "arr"
+            arr: array of all angle of attacks
+
+      Returns:
+            The array of weights of the airfoil linearly centered around a given value with the same shape as the given array "arr"
+      """
     dy_dx = (w1 - w2) / width
     weights = np.ones(arr.shape) * w2
     center_i = np.searchsorted(arr, center)
@@ -21,19 +34,23 @@ def distribute(center: float, w1: float, w2: float, width, arr):
 
 
 def weighted_mean(arr, weights):
+    """Returns the weighted mean given an array and its weights"""
     return np.average(arr, weights=weights)
 
 
 def max_val_dict(my_dict):
+    """Returns the key and value of the maximum value in a dictionary"""
     max_item = max(my_dict.items(), key=lambda item: item[1])
     return max_item[0], max_item[1]
 
 
 def sort_dict(my_dict):
+    """Returns a dictionary sorted by value"""
     return dict(sorted(my_dict.items(), key=lambda item: item[1]))
 
 def delete_zero_values(dict_in):
-  return {key: value for key, value in dict_in.items() if value != 0}
+    """Returns a dictionary without zero values"""
+    return {key: value for key, value in dict_in.items() if value != 0}
 
 df = pd.read_pickle('data.pkl')
 cl = df['cl'].to_numpy()
