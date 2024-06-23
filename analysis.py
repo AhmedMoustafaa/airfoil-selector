@@ -94,7 +94,7 @@ def max_cl(Re_range, re_weights, aoa_weights):
             else:
                 pass
         cl_means[names[i]] = weighted_mean(cl_res, re_weights)
-    return cl_means
+    return sort_dict(delete_zero_values(cl_means))
 
 
 def check_cl(cl_values, cl_array):
@@ -154,7 +154,7 @@ def min_cd_cl(Re_range, Re_weights, cl_range, cl_weights):
                 pass
 
         cd_means[names[i]] = weighted_mean(cd_res, Re_weights)
-    return delete_zero_values(cd_means)
+    return sort_dict(delete_zero_values(cd_means))
 
 def min_cd(Re_range, re_weights, cl_range, cl_weights, aoa_range):
     cd_means = {}  # stores the weighted means of CD of all airfoils
@@ -172,7 +172,7 @@ def min_cd(Re_range, re_weights, cl_range, cl_weights, aoa_range):
             else:
                 pass
         cd_means[names[i]] = weighted_mean(cd_res, re_weights)
-    return delete_zero_values(cd_means)
+    return sort_dict(delete_zero_values(cd_means))
 
 def max_cl_cd(Re_range, re_weights,aoa_weights):
     cl_cd_means = {}
@@ -187,7 +187,7 @@ def max_cl_cd(Re_range, re_weights,aoa_weights):
             else:
                 pass
         cl_cd_means[names[i]] = weighted_mean(cl_res, re_weights)
-    return delete_zero_values(cl_cd_means)
+    return sort_dict(delete_zero_values(cl_cd_means))
 
 # constraints
 def constraint_thickness(dict, thick):

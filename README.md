@@ -23,7 +23,19 @@ Dependint on the objective of the search, deferent inputs are needed
 - Pick the desired Cl range
 - Specify weights for the picked values
 
-# Examples Usage
+# Usage
+Clone the git repo and save in the directory of your project
+then import .analysis to your code
+
+## avaiable functions
+- distribute: This function distributes the weights over a range of AOAs linearly centered around a given value.
+- max_cl: returns a dictionary of airfoils names as keys and the mean Cl as values sorted in ascending order
+- max_cl_cd: returns a dictionary of airfoils names as keys and the mean Cl/Cd as values sorted in ascending order
+- min_cd: returns a dictionary of airfoils names as keys and the mean Cd as values sorted in ascending order
+- min_cd_aoa: returns a dictionary of airfoils names as keys and the mean Cd as values sorted in ascending order
+- contraint_thickness: returns a dictionary of airfoils whose max thickness is within a given range
+- constraint_camber: returns a dictionary of airfoils whose max camber is within a given range
+## Examples
 ```python
 Re_range = [1e4, 5e4, 1e5, 3e5, 5e5]
 Re_weights = [3,2,2,5,2]  #assuming you take off at 1e4 and cruise at 3e5
@@ -33,5 +45,11 @@ aoa_weights = distribute(center=2, w1=5, w2=1, arr=aoa_range) #assuming you crui
 
 # get maximum cl
 maximum_cl = max_cl(Re_range, Re_weights, aoa_range, aoa_weights)
-best_airfoils = list(sort_dict(maximum_cl).items())[-5:]
+best_airfoils = list(maximum_cl.items())[-5:]
 maximum_cl_constrained = constraint_camber(constraint_thickness(maximum_cl, theck=0.2), camb=0.02)  #max camber = 2% of the chord, #max thickness = 20% of the chord
+
+# get minimum cd
+cl_range = [0.5,0.6,0.7,0.8]
+cl_weights =  [1,2,3,4]
+aoa_range = [0, 5]  #this will search for airfoils that has the given cl values only at the given aoa_range
+min_cd = min_cd_aoa(Re_range, Re_weights, cl_range, cl_weights, aoa_range)
