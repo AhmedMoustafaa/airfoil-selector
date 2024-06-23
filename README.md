@@ -1,4 +1,4 @@
-# Multi-Objective Airfoil Optimization for UAV Design
+# Multi-Objective Airfoil Selector for UAV Design
 This project implements an optimization algorithm for selecting airfoils that meet multiple design objectives for Unmanned Aerial Vehicles (UAVs). It focuses on maximizing lift coefficient (CL), minimizing drag coefficient (Cd), and optimizing the Cd/CL ratio, considering user-defined constraints.
 
 # Features
