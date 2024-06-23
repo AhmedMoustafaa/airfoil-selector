@@ -53,3 +53,8 @@ cl_range = [0.5,0.6,0.7,0.8]
 cl_weights =  [1,2,3,4]
 aoa_range = [0, 5]  #this will search for airfoils that has the given cl values only at the given aoa_range
 min_cd = min_cd_aoa(Re_range, Re_weights, cl_range, cl_weights, aoa_range)
+```
+
+# TODO
+- make a website using flask library that provides an easier interface for users
+- optimize the workflow of the program (requires some knowlege that I don't currently have)
