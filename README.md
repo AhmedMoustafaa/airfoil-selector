@@ -24,7 +24,7 @@ Depending on the objective of the search, different inputs are needed
 - Specify weights for the picked values
 
 # Usage
-**Clone the git repo and save in the directory of your project, run **main_ne.py then import .analysis to your code**
+Clone the git repo and save in the directory of your project, run **main_ne.py then import .analysis to your code**
 
 ## available functions
 - distribute: This function distributes the weights over a range of AOAs linearly centered around a given value.
