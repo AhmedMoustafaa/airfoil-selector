@@ -56,5 +56,5 @@ min_cd = min_cd_aoa(Re_range, Re_weights, cl_range, cl_weights, aoa_range)
 ```
 
 # TODO
-- make a website using Flask library that provides an easier interface for users
-- optimize the workflow of the program (requires some knowledge that I don't currently have)
+[] make a website using Flask library that provides an easier interface for users
+[] optimize the workflow of the program (requires some knowledge that I don't currently have)
