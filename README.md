@@ -1,5 +1,5 @@
 # Multi-Objective Airfoil Selector for UAV Design
-This project implements an optimization algorithm for selecting airfoils that meet multiple design objectives for Unmanned Aerial Vehicles (UAVs). It focuses on maximizing lift coefficient (CL), minimizing drag coefficient (Cd), and optimizing the Cd/CL ratio, considering user-defined constraints.
+This project implements an optimized search algorithm for selecting airfoils that meet multiple design objectives for Unmanned Aerial Vehicles (UAVs). It focuses on maximizing the lift coefficient (CL), minimizing the drag coefficient (Cd), and optimizing the Cd/CL ratio, considering user-defined constraints.
 
 # Features
 - Supports multi-objective optimization with three objectives:
@@ -11,28 +11,30 @@ This project implements an optimization algorithm for selecting airfoils that me
 - Accepts a range of Reynolds numbers (Re) and angles of attack (AoA) with corresponding weights.
 
 # Inputs
-Dependint on the objective of the search, deferent inputs are needed 
+Depending on the objective of the search, different inputs are needed 
 ## Reynolds Numbers
-- Pick suitable reynolds numbers from the values [1e4, 5e4, 1e5, 3e5, 5e5, 7e5, 1e6]
+- Pick suitable Reynolds numbers from the values [1e4, 5e4, 1e5, 3e5, 5e5, 7e5, 1e6]
 - Specify weights for the picked values
 ## Angle of attack
-- Pick suitable reynolds numbers from the range (-10 to 20) degrees
+- Pick suitable Reynolds numbers from the range (-10 to 20) degrees
 - Specify weights for the picked values
-- You can use the function "distribute" to linearly distibute a weight over a range of angle of attacks
+- You can use the function "distribute" to linearly distribute a weight over a range of angles of attacks
 ## Cl
 - Pick the desired Cl range
 - Specify weights for the picked values
 
 # Usage
-**Clone the git repo and save in the directory of your project
-then import .analysis to your code**
+- Clone the git repo and save it in the directory of your project
+- unzip "arifoilsdb"
+- run **main_ne.py**
+- import **.analysis** to your code
 
-## avaiable functions
+## available functions
 - distribute: This function distributes the weights over a range of AOAs linearly centered around a given value.
-- max_cl: returns a dictionary of airfoils names as keys and the mean Cl as values sorted in ascending order
-- max_cl_cd: returns a dictionary of airfoils names as keys and the mean Cl/Cd as values sorted in ascending order
-- min_cd: returns a dictionary of airfoils names as keys and the mean Cd as values sorted in ascending order
-- min_cd_aoa: returns a dictionary of airfoils names as keys and the mean Cd as values sorted in ascending order
+- max_cl: returns a dictionary of airfoil names as keys and the mean Cl as values sorted in ascending order
+- max_cl_cd: returns a dictionary of airfoil names as keys and the mean Cl/Cd as values sorted in ascending order
+- min_cd: returns a dictionary of airfoil names as keys and the mean Cd as values sorted in ascending order
+- min_cd_aoa: returns a dictionary of airfoil names as keys and the mean Cd as values sorted in ascending order
 - contraint_thickness: returns a dictionary of airfoils whose max thickness is within a given range
 - constraint_camber: returns a dictionary of airfoils whose max camber is within a given range
 ## Examples
@@ -48,13 +50,13 @@ maximum_cl = max_cl(Re_range, Re_weights, aoa_range, aoa_weights)
 best_airfoils = list(maximum_cl.items())[-5:]
 maximum_cl_constrained = constraint_camber(constraint_thickness(maximum_cl, theck=0.2), camb=0.02)  #max camber = 2% of the chord, #max thickness = 20% of the chord
 
-# get minimum cd
+# get the minimum cd
 cl_range = [0.5,0.6,0.7,0.8]
 cl_weights =  [1,2,3,4]
-aoa_range = [0, 5]  #this will search for airfoils that has the given cl values only at the given aoa_range
+aoa_range = [0, 5]  #this will search for airfoils that have the given cl values only at the given aoa_range
 min_cd = min_cd_aoa(Re_range, Re_weights, cl_range, cl_weights, aoa_range)
 ```
 
-# TODO
-- make a website using flask library that provides an easier interface for users
-- optimize the workflow of the program (requires some knowlege that I don't currently have)
+# TO-DO List
+- [ ] make a website using Flask library that provides an easier interface for users
+- [ ] optimize the workflow of the program (requires some knowledge that I don't currently have)
