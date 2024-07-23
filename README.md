@@ -2,10 +2,10 @@
 This project implements an optimized search algorithm for selecting airfoils that meet multiple design objectives for Unmanned Aerial Vehicles (UAVs). It focuses on maximizing the lift coefficient (CL), minimizing the drag coefficient (Cd), and optimizing the Cd/CL ratio, considering user-defined constraints.
 
 # Features
-- Supports multi-objective optimization with three objectives:
+- Supports searching with three objectives:
     - Maximizing lift coefficient (CL)
     - Minimizing drag coefficient (Cd)
-    - Optimizing Cd/CL ratio
+    - Maximizing Cd/CL ratio
 - Allows user-defined weights for each objective to prioritize specific design requirements.
 - Considers optional constraints on maximum airfoil thickness and camber.
 - Accepts a range of Reynolds numbers (Re) and angles of attack (AoA) with corresponding weights.
