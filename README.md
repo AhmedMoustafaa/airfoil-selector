@@ -16,9 +16,9 @@ Depending on the objective of the search, different inputs are needed
 - Pick suitable Reynolds numbers from the values [1e4, 5e4, 1e5, 3e5, 5e5, 7e5, 1e6]
 - Specify weights for the picked values
 ## Angle of attack
-- Pick suitable Reynolds numbers from the range (-10 to 20) degrees
+- Pick suitable subrange of AoAs from the range (-10 to 20) degrees
 - Specify weights for the picked values
-- You can use the function "distribute" to linearly distribute a weight over a range of angles of attacks
+- You can use the function "distribute" to linearly distribute a weight over a range of angles of attacks around a specific point
 ## Cl
 - Pick the desired Cl range
 - Specify weights for the picked values
