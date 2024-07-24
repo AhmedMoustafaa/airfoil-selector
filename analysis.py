@@ -190,19 +190,21 @@ def max_cl_cd(Re_range, re_weights,aoa_weights):
     return sort_dict(delete_zero_values(cl_cd_means))
 
 # constraints
-def constraint_thickness(dict, thick):
+def constraint_thickness(dict, thick_min, thick_max):
     dictt = dict.copy()
     for i,key in enumerate(dict.keys()):
-        if thickness[names.searchsorted(key)][0][0] > thick:
+        index = names.searchsorted(key)
+        if thickness[index][0][0] >= thick_min and thickness[index][0][0] <= thick_max:
             pass
         else:
             dictt.pop(key, None)
     return dictt
 
-def constraint_camber(dict, camb):
+def constraint_camber(dict, camb_min, camb_max):
     dictt = dict.copy()
     for i, key in enumerate(dict.keys()):
-        if thickness[names.searchsorted(key)][0][0] > camb:
+        index = thickness[index][0][0] > thick_min
+        if thickness[index][0][0] >= camb_min and thickness[index][0][0] <= camb_max:
             pass
         else:
             dictt.pop(key, None)

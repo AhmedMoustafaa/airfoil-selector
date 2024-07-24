@@ -26,6 +26,7 @@ Depending on the objective of the search, different inputs are needed
 # Usage
 - Clone the git repo and save it in the directory of your project
 - unzip "arifoilsdb"
+- Download the required libraries [pandas, aerosandbox, numpy]
 - run **main_ne.py**
 - import **.analysis** to your code
 
@@ -48,7 +49,7 @@ aoa_weights = distribute(center=2, w1=5, w2=1, arr=aoa_range) #assuming you crui
 # get maximum cl
 maximum_cl = max_cl(Re_range, Re_weights, aoa_range, aoa_weights)
 best_airfoils = list(maximum_cl.items())[-5:]
-maximum_cl_constrained = constraint_camber(constraint_thickness(maximum_cl, thick=0.1), camb=0.02)  #max camber = 2% of the chord, #max thickness = 10% of the chord
+maximum_cl_constrained = constraint_camber(constraint_thickness(maximum_cl, thick_min=0.1, thick_max=0.25),camb_min=0, camb_max=0.02)  #0 <= camber < 2% of the chord, 10% <= thickness<=25% of the chord
 
 # get the minimum cd
 cl_range = [0.5,0.6,0.7,0.8]
