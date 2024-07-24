@@ -48,7 +48,7 @@ aoa_weights = distribute(center=2, w1=5, w2=1, arr=aoa_range) #assuming you crui
 # get maximum cl
 maximum_cl = max_cl(Re_range, Re_weights, aoa_range, aoa_weights)
 best_airfoils = list(maximum_cl.items())[-5:]
-maximum_cl_constrained = constraint_camber(constraint_thickness(maximum_cl, theck=0.2), camb=0.02)  #max camber = 2% of the chord, #max thickness = 20% of the chord
+maximum_cl_constrained = constraint_camber(constraint_thickness(maximum_cl, thick=0.1), camb=0.02)  #max camber = 2% of the chord, #max thickness = 10% of the chord
 
 # get the minimum cd
 cl_range = [0.5,0.6,0.7,0.8]

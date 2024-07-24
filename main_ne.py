@@ -40,6 +40,8 @@ camber = np.zeros(shape)
 
 for i in range(len(airfoils)):
     af = asb.Airfoil(airfoils[i])
+    progress = i/len(airfoils)
+    print(f"calculating for airfoil:{af}...progress={progress} %")
     aero_data = af.get_aero_from_neuralfoil(
         alpha=Alpha.flatten(),
         Re=Re.flatten(),

@@ -191,20 +191,20 @@ def max_cl_cd(Re_range, re_weights,aoa_weights):
 
 # constraints
 def constraint_thickness(dict, thick):
-    dictt = dict
-    for key in enumerate(dictt.keys()):
-        if thickness[key[0]] in thick:
+    dictt = dict.copy()
+    for i,key in enumerate(dict.keys()):
+        if thickness[names.searchsorted(key)][0][0] > thick:
             pass
         else:
-            del dictt[key[1]]
+            dictt.pop(key, None)
     return dictt
 
 def constraint_camber(dict, camb):
-    dictt = dict
-    for key in enumerate(dictt.keys()):
-        if camber[key[0]] in camb:
+    dictt = dict.copy()
+    for i, key in enumerate(dict.keys()):
+        if thickness[names.searchsorted(key)][0][0] > camb:
             pass
         else:
-            del dictt[key[1]]
+            dictt.pop(key, None)
     return dictt
 
