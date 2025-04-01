@@ -23,7 +23,7 @@ Depending on the objective of the search, different inputs are needed
 - Pick the desired Cl range
 - Specify weights for the picked values
 
-# Usage
+# Installation & Usage
 - Clone the git repo and save it in the directory of your project
 - unzip "arifoilsdb"
 - Download the required libraries [pandas, aerosandbox, numpy]
