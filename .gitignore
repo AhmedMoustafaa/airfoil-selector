@@ -1,0 +1,9 @@
+/validation/
+/databases/airfoils.csv
+/databases/full_data.xlsx
+/databases/small_data.pkl
+/legacy/
+/utils/airfoil geometries.py
+/utils/fitting.py
+/utils/parser.py
+.idea/
