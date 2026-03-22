@@ -50,7 +50,7 @@ except ImportError:
 
 DB_DIR     = Path('../airfoilsdb')
 OUT_PKL    = Path('../databases/full_data_xfoil.pkl')
-XFOIL_CMD  = 'xfoil'   # set to full path if xfoil is not on PATH
+XFOIL_CMD  = Path('../xfoil/xfoil_uav')
 
 ALPHA = np.linspace(-5, 20, 26)
 
