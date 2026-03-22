@@ -6,10 +6,10 @@ Multi-objective airfoil selector for UAV design.
 Aerodynamic metrics supported
 -----------------------------------------
   cl          — maximum lift coefficient          (takeoff / high-lift)
-  cl_cd       — CL / CD                           (glide ratio / jet range)
-  cl32_cd     — CL^(3/2) / CD                    (propeller endurance, Breguet)
-  cl12_cd     — CL^(1/2) / CD                    (minimum power / prop range)
-  min_cd      — minimum drag coefficient          (cruise drag budget)
+  cl_cd       — CL / CD                           (glide ratio / prop range / jet endurance)
+  cl32_cd     — CL^(3/2) / CD                    (prop-driven endurance)
+  cl12_cd     — CL^(1/2) / CD                    (jet-propelled range)
+  min_cd      — minimum drag coefficient          (cruise drag)
 
 Constraint types  (used with apply_constraints)
 -------------------------------------------------
@@ -43,18 +43,19 @@ def _metric_cl(cl, cd):
     return np.asarray(cl, dtype=float)
 
 def _metric_cl_cd(cl, cd):
+    """CL / CD — maximise for max prop range or jet endurance"""
     cl, cd = np.asarray(cl, dtype=float), np.asarray(cd, dtype=float)
     with np.errstate(divide='ignore', invalid='ignore'):
         return np.where(cd > 0, cl / cd, 0.0)
 
 def _metric_cl32_cd(cl, cd):
-    """CL^(3/2) / CD — maximise for best propeller endurance (Breguet prop endurance)."""
+    """CL^(3/2) / CD — maximise for best propeller endurance"""
     cl, cd = np.asarray(cl, dtype=float), np.asarray(cd, dtype=float)
     with np.errstate(divide='ignore', invalid='ignore'):
         return np.where((cl > 0) & (cd > 0), cl ** 1.5 / cd, 0.0)
 
 def _metric_cl12_cd(cl, cd):
-    """CL^(1/2) / CD — maximise for minimum-power speed / best propeller range."""
+    """CL^(1/2) / CD — maximise for best jet range."""
     cl, cd = np.asarray(cl, dtype=float), np.asarray(cd, dtype=float)
     with np.errstate(divide='ignore', invalid='ignore'):
         return np.where((cl > 0) & (cd > 0), cl ** 0.5 / cd, 0.0)
@@ -70,9 +71,9 @@ _OBJECTIVE_REGISTRY = {
 
 _OBJECTIVE_LABELS = {
     'cl':      'Max CL  (high-lift)',
-    'cl_cd':   'Max CL/CD  (glide / jet range)',
+    'cl_cd':   'Max CL/CD  (glide ratio / prop range / jet endurance)',
     'cl32_cd': 'Max CL^1.5/CD  (prop endurance)',
-    'cl12_cd': 'Max CL^0.5/CD  (prop range / min-power)',
+    'cl12_cd': 'Max CL^0.5/CD  (jet range)',
     'min_cd':  'Min CD  (cruise drag budget)',
 }
 
@@ -345,15 +346,15 @@ class AirfoilSelector:
         return self._aoa_sweep(_metric_cl, Re_range, re_weights, aoa_weights)
 
     def max_cl_cd(self, Re_range, re_weights, aoa_weights):
-        """Maximise CL/CD — best glide ratio / jet range."""
+        """Maximise CL/CD — best glide ratio / prop range / jet endurance."""
         return self._aoa_sweep(_metric_cl_cd, Re_range, re_weights, aoa_weights)
 
     def max_cl32_cd(self, Re_range, re_weights, aoa_weights):
-        """Maximise CL^(3/2)/CD — best propeller endurance (Breguet prop)."""
+        """Maximise CL^(3/2)/CD — best propeller endurance / minimum power speed."""
         return self._aoa_sweep(_metric_cl32_cd, Re_range, re_weights, aoa_weights)
 
     def max_cl12_cd(self, Re_range, re_weights, aoa_weights):
-        """Maximise CL^(1/2)/CD — minimum power speed / best propeller range."""
+        """Maximise CL^(1/2)/CD — best jet range."""
         return self._aoa_sweep(_metric_cl12_cd, Re_range, re_weights, aoa_weights)
 
     def min_cd(self, Re_range, re_weights, cl_range, cl_weights, aoa_range):
